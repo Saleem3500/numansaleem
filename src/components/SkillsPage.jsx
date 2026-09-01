@@ -34,7 +34,7 @@ const SkillsPage = () => {
                             </div>
                             <h2 className="text-3xl font-bold">Full Stack Web Development</h2>
                             <p className="text-slate-500 dark:text-slate-400">
-                                From robust backend architectures to dynamic, responsive frontend interfaces. I specialize in the MERN stack and modern CSS frameworks to deliver seamless user experiences.
+                                From robust backend architectures to dynamic, responsive frontend interfaces. I specialize in React.js, Next.js and the MERN stack, write type-safe code with TypeScript, and use modern CSS frameworks to deliver seamless user experiences.
                             </p>
                         </div>
                         <div className="lg:col-span-8">
@@ -71,7 +71,71 @@ const SkillsPage = () => {
                                     <i className="fas fa-server text-4xl text-purple-500 group-hover:scale-110 transition-transform"></i>
                                     <span className="font-medium text-sm">Express & APIs</span>
                                 </div>
+                                <div className="flex flex-col items-center gap-3 interactive group">
+                                    <i className="fas fa-layer-group text-4xl text-slate-700 dark:text-slate-200 group-hover:scale-110 transition-transform"></i>
+                                    <span className="font-medium text-sm">Next.js</span>
+                                </div>
+                                <div className="flex flex-col items-center gap-3 interactive group">
+                                    <i className="fas fa-file-code text-4xl text-blue-600 group-hover:scale-110 transition-transform"></i>
+                                    <span className="font-medium text-sm">TypeScript</span>
+                                </div>
+                                <div className="flex flex-col items-center gap-3 interactive group">
+                                    <i className="fas fa-table text-4xl text-sky-600 group-hover:scale-110 transition-transform"></i>
+                                    <span className="font-medium text-sm">PostgreSQL</span>
+                                </div>
+                                <div className="flex flex-col items-center gap-3 interactive group">
+                                    <i className="fab fa-aws text-4xl text-orange-400 group-hover:scale-110 transition-transform"></i>
+                                    <span className="font-medium text-sm">AWS</span>
+                                </div>
+                                <div className="flex flex-col items-center gap-3 interactive group">
+                                    <i className="fas fa-project-diagram text-4xl text-pink-500 group-hover:scale-110 transition-transform"></i>
+                                    <span className="font-medium text-sm">GraphQL</span>
+                                </div>
+                                <div className="flex flex-col items-center gap-3 interactive group">
+                                    <i className="fas fa-leaf text-4xl text-green-600 group-hover:scale-110 transition-transform"></i>
+                                    <span className="font-medium text-sm">MongoDB</span>
+                                </div>
+                                <div className="flex flex-col items-center gap-3 interactive group">
+                                    <i className="fas fa-bolt text-4xl text-emerald-500 group-hover:scale-110 transition-transform"></i>
+                                    <span className="font-medium text-sm">Supabase</span>
+                                </div>
+                                <div className="flex flex-col items-center gap-3 interactive group">
+                                    <i className="fab fa-git-alt text-4xl text-orange-600 group-hover:scale-110 transition-transform"></i>
+                                    <span className="font-medium text-sm">Git / GitHub</span>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+
+                    {/* 1b. Databases, Cloud & Developer Tooling */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center" data-aos="fade-up">
+                        <div className="lg:col-span-8 order-2 lg:order-1">
+                            <div className="glass-panel p-8 rounded-3xl grid grid-cols-2 md:grid-cols-4 gap-6">
+                                {[
+                                    { icon: 'fas fa-database', color: 'text-sky-500', name: 'Oracle APEX' },
+                                    { icon: 'fas fa-table', color: 'text-blue-400', name: 'PostgreSQL' },
+                                    { icon: 'fas fa-cloud', color: 'text-orange-400', name: 'AWS' },
+                                    { icon: 'fas fa-paper-plane', color: 'text-orange-500', name: 'Postman' },
+                                    { icon: 'fas fa-bug', color: 'text-yellow-500', name: 'Chrome DevTools' },
+                                    { icon: 'fas fa-code', color: 'text-blue-500', name: 'VS Code' },
+                                    { icon: 'fab fa-npm', color: 'text-red-500', name: 'NPM' },
+                                    { icon: 'fas fa-cubes', color: 'text-purple-400', name: 'Monorepo / Vercel' },
+                                ].map((tool) => (
+                                    <div key={tool.name} className="flex flex-col items-center gap-3 interactive group text-center">
+                                        <i className={`${tool.icon} text-4xl ${tool.color} group-hover:scale-110 transition-transform`}></i>
+                                        <span className="font-medium text-sm">{tool.name}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="lg:col-span-4 space-y-4 order-1 lg:order-2">
+                            <div className="w-16 h-16 rounded-2xl bg-primary/20 flex items-center justify-center text-3xl text-primary mb-6">
+                                <i className="fas fa-database"></i>
+                            </div>
+                            <h2 className="text-3xl font-bold">Databases, Cloud & Tooling</h2>
+                            <p className="text-slate-500 dark:text-slate-400 text-left">
+                                Designing schemas, optimizing queries and shipping to the cloud. I work daily with relational and document databases, build and document REST/GraphQL endpoints, and deploy monorepo applications with modern CI-friendly tooling.
+                            </p>
                         </div>
                     </div>
 

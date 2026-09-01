@@ -10,7 +10,7 @@ const Skills = () => {
                     </h2>
                     <div className="h-1 w-20 bg-gradient-to-r from-primary to-secondary mx-auto rounded-full mb-8"></div>
                     <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
-                        I offer a diverse set of services bridging the gap between technical execution and visual aesthetics. From full-stack web architectures to creative graphic design and efficient office management.
+                        I offer a diverse set of services bridging the gap between technical execution and visual aesthetics. From full-stack web architectures in React.js, Next.js, Node.js and TypeScript, to database work in PostgreSQL, SQL and Oracle APEX, plus creative graphic design and efficient office management.
                     </p>
                 </div>
 

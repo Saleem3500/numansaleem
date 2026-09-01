@@ -164,8 +164,8 @@ const GraduationStory = () => {
                         {/* Hidden real download anchor */}
                         <a
                             ref={downloadRef}
-                            href="/Muhammad_Numan_Saleem_associate_software_develper.pdf"
-                            download="Muhammad_Numan_Saleem_CV.pdf"
+                            href="/Muhammad_Numan_Saleem_Software_Engineer.pdf"
+                            download="Muhammad_Numan_Saleem_Software_Engineer.pdf"
                             style={{ display: 'none' }}
                             aria-hidden="true"
                         />

@@ -7,6 +7,50 @@ import './ProjectsPage.css';
 
 const myProjects = [
     {
+        id: 10,
+        title: "OpenHouse",
+        tag: "Backend / GraphQL",
+        year: "2026",
+        desc: "Scalable backend services for the OpenHouse platform in Node.js, TypeScript and PostgreSQL. Built GraphQL APIs, managed schema changes with TypeORM migrations, and maintained Swagger/OpenAPI docs for REST endpoints.",
+        tech: ["Next.js", "Tailwind", "Express.js", "PostgreSQL", "GraphQL", "TypeORM"],
+        type: "primary",
+        link: "https://onopenhouse.co.uk/",
+        github: "#"
+    },
+    {
+        id: 11,
+        title: "Inventory & Invoice Management System",
+        tag: "Full Stack",
+        year: "2026",
+        desc: "Full-stack inventory and invoice system with CRUD for 100+ products and invoices. Downloadable PDF invoice generation cut manual processing time by 60%. Structured as a Monorepo and deployed on Vercel.",
+        tech: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Vercel"],
+        type: "secondary",
+        link: "#",
+        github: "#"
+    },
+    {
+        id: 12,
+        title: "Smart Digital Ad-Display System",
+        tag: "AI / Computer Vision",
+        year: "2025",
+        desc: "Engineered a real-time targeted advertising system using YOLO object detection for accurate human recognition. Built dynamic ad-display logic that matched advertisements to detected user context and demographics, with frontend and backend integrated over RESTful APIs for real-time data communication.",
+        tech: ["React.js", "Node.js", "YOLO", "MySQL", "REST APIs"],
+        type: "primary",
+        link: "#",
+        github: "#"
+    },
+    {
+        id: 13,
+        title: "Personal Portfolio Website",
+        tag: "Frontend",
+        year: "2025",
+        desc: "Implemented responsive design principles ensuring a seamless experience across all screen sizes and devices. Optimized for ATS compatibility and professional project showcasing to maximize recruiter engagement.",
+        tech: ["React.js", "Tailwind", "Framer Motion"],
+        type: "secondary",
+        link: "https://numansaleem.netlify.app/",
+        github: "#"
+    },
+    {
         id: 1,
         title: "Chrome Extensions",
         tag: "V3 Extension",
@@ -74,112 +118,104 @@ const myProjects = [
     }
 ];
 
-const floatingLogos = [
-    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg",
-    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
-    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/photoshop/photoshop-original.svg",
-    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
-    "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
-];
+const CARD_SPACING = 20;
+const FIRST_CARD_DEPTH = 24;
+const RUN_OFF = 30;
 
-const FloatingLogos = ({ numProjects }) => {
-    const logosData = React.useMemo(() => {
-        // Create 12 random logos spread along the track
-        return Array.from({ length: 12 }).map((_, i) => ({
-            id: i,
-            src: floatingLogos[i % floatingLogos.length],
-            position: [
-                (Math.random() - 0.5) * 35, // Spread wide on X axis
-                (Math.random() * 15) - 3,   // Float between -3 and 12 on Y axis
-                -(Math.random() * (numProjects * 20 + 20)) // Spread depth based on projects
-            ],
-            scale: Math.random() * 0.2 + 0.25, // Randomize size to be small and minor
-        }));
-    }, [numProjects]);
+const isRealLink = (url) => Boolean(url) && url !== '#';
+
+const ProjectCard = ({ project }) => {
+    const isPrimary = project.type === 'primary';
+    const showSource = isRealLink(project.github);
+    const showLive = isRealLink(project.link);
 
     return (
-        <>
-            {logosData.map((data) => (
-                <Float key={`logo-${data.id}`} floatIntensity={2} speed={1.5} rotationIntensity={1.5}>
-                    <group position={data.position}>
-                        {/* Using Html to display SVGs perfectly in 3D */}
-                        <Html transform center distanceFactor={15} zIndexRange={[100, 0]}>
-                            <img
-                                src={data.src}
-                                alt="tech-logo"
-                                style={{ width: `${data.scale * 80}px`, height: `${data.scale * 80}px` }}
-                                className="drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] opacity-40 pointer-events-none"
-                            />
-                        </Html>
-                    </group>
-                </Float>
-            ))}
-        </>
+        <article className="w-full text-left rounded-2xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl p-7 shadow-xl transition-colors duration-300 hover:border-primary/60">
+            <div className="flex items-center justify-between gap-3 mb-5">
+                <span
+                    className={`px-3 py-1 text-[11px] font-bold rounded-full ${isPrimary
+                        ? 'bg-primary/15 text-primary'
+                        : 'bg-secondary/15 text-secondary'}`}
+                >
+                    {project.tag}
+                </span>
+                <span className="text-[11px] font-semibold tracking-wider text-slate-500 dark:text-slate-400">
+                    {project.year}
+                </span>
+            </div>
+
+            <h3 className="text-2xl font-extrabold mb-3 text-slate-900 dark:text-white leading-snug">
+                {project.title}
+            </h3>
+
+            <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300 mb-5">
+                {project.desc}
+            </p>
+
+            <div className="flex flex-wrap gap-2">
+                {project.tech.map((tech) => (
+                    <span
+                        key={tech}
+                        className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300"
+                    >
+                        {tech}
+                    </span>
+                ))}
+            </div>
+
+            {/* Only render the links that actually go somewhere. */}
+            {(showSource || showLive) && (
+                <div className="flex gap-5 mt-6 pt-5 border-t border-slate-200 dark:border-white/10">
+                    {showSource && (
+                        <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary transition-colors flex items-center gap-2"
+                        >
+                            <i className="fab fa-github text-lg"></i> Source
+                        </a>
+                    )}
+                    {showLive && (
+                        <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-secondary transition-colors flex items-center gap-2"
+                        >
+                            <i className="fas fa-external-link-alt"></i> Live
+                        </a>
+                    )}
+                </div>
+            )}
+        </article>
     );
 };
 
-const ProjectCard = ({ project, index }) => {
-    // Alternating left/right offset 
-    const isEven = index % 2 === 0;
-    const isLeft = isEven;
-    const xPos = isLeft ? -4.5 : 4.5;
+const SceneCard = ({ project, index }) => {
+    const wrapper = useRef(null);
+    const cardZ = -(index * CARD_SPACING) - FIRST_CARD_DEPTH;
 
-    // Deeper into the Z-axis. Each item is spaced by 20 units.
-    const zPos = -(index * 20) - 15;
+    // The camera flies through the track, so a card that stayed opaque would
+    // blow up to fill the screen and smear over its neighbours on the way past.
+    // Fade each one out just before the camera reaches it.
+    useFrame(({ camera }) => {
+        const el = wrapper.current;
+        if (!el) return;
 
-    // Dynamic classes based on position
-    const textAlignClass = isLeft ? 'text-right' : 'text-left';
-    const flexRowClass = isLeft ? 'flex-row-reverse' : 'flex-row';
-    const justifyClass = isLeft ? 'justify-end' : 'justify-start';
+        const distance = camera.position.z - cardZ;
+        const opacity = THREE.MathUtils.clamp((distance - 5) / 8, 0, 1);
+
+        el.style.opacity = opacity;
+        el.style.pointerEvents = opacity > 0.9 ? 'auto' : 'none';
+    });
 
     return (
-        <group position={[xPos, 0, zPos]}>
-            <Float floatIntensity={2} speed={1.5} rotationIntensity={0.5}>
-                {/* 
-                  Using Html from drei to render proper DOM elements.
-                  transform: scale to fit 3D space
-                  center: anchored centrally 
-                  distanceFactor: keeps it sized proportionally as we approach
-                */}
-                <Html transform center scale={0.7} distanceFactor={15} zIndexRange={[100, 0]} className="pointer-events-none">
-                    <div className="w-[400px] p-8 rounded-3xl shadow-[0_20px_40px_rgba(0,0,0,0.8)] backdrop-blur-xl bg-slate-800/95 border-2 border-slate-600/50 pointer-events-auto hover:border-primary/80 hover:shadow-[0_0_40px_rgba(56,189,248,0.3)] transition-all duration-500 relative group overflow-hidden">
-
-                        {/* Glow effect sitting behind the card */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl -z-10"></div>
-
-                        <div className={`flex justify-between items-start mb-4 relative z-10 ${flexRowClass}`}>
-                            <div className={`px-3 py-1.5 text-xs font-bold rounded-full ${project.type === 'primary' ? 'bg-primary/25 text-primary border border-primary/30' : 'bg-secondary/25 text-secondary border border-secondary/30'}`}>
-                                <i className={`fas fa-code-branch ${isLeft ? 'ml-1' : 'mr-1'}`}></i>
-                                {project.tag}
-                            </div>
-                            <span className="text-sm font-semibold tracking-wider text-slate-300 bg-black/30 px-3 py-1 rounded-full">{project.year}</span>
-                        </div>
-
-                        <h3 className={`text-3xl font-extrabold mb-3 text-white cursor-pointer group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary transition-all duration-300 relative z-10 ${textAlignClass}`}>
-                            {project.title}
-                        </h3>
-
-                        <p className={`text-slate-200 mb-6 text-sm leading-relaxed ${isLeft ? 'border-r-2 border-primary/50 pr-3' : 'border-l-2 border-primary/50 pl-3'} relative z-10 ${textAlignClass}`}>
-                            {project.desc}
-                        </p>
-
-                        <div className={`flex flex-wrap gap-2 mb-8 relative z-10 ${justifyClass}`}>
-                            {project.tech.map((t, i) => (
-                                <span key={i} className="text-[11px] font-semibold px-2.5 py-1 rounded bg-black/40 text-slate-200 border border-slate-600/50">
-                                    {t}
-                                </span>
-                            ))}
-                        </div>
-
-                        <div className={`flex gap-6 pt-4 border-t border-slate-600/50 relative z-10 ${justifyClass}`}>
-                            <a href={project.github} className={`text-slate-300 hover:text-primary transition-colors font-semibold text-sm flex items-center gap-2 cursor-pointer ${flexRowClass}`}>
-                                <i className="fab fa-github text-xl"></i> Source
-                            </a>
-                            <a href={project.link} className={`text-slate-300 hover:text-secondary transition-colors font-semibold text-sm flex items-center gap-2 cursor-pointer ${flexRowClass}`}>
-                                <i className="fas fa-external-link-alt text-lg"></i> Live
-                            </a>
-                        </div>
+        <group position={[index % 2 === 0 ? -4.5 : 4.5, 0, cardZ]}>
+            <Float floatIntensity={1.5} speed={1.2} rotationIntensity={0.3}>
+                <Html transform center scale={0.7} distanceFactor={15} zIndexRange={[90, 0]}>
+                    <div ref={wrapper} className="w-[400px]">
+                        <ProjectCard project={project} />
                     </div>
                 </Html>
             </Float>
@@ -187,70 +223,38 @@ const ProjectCard = ({ project, index }) => {
     );
 };
 
-const JourneyCamera = ({ scrollProgress, numProjects }) => {
+const JourneyCamera = ({ scrollProgress }) => {
     useFrame((state, delta) => {
-        // Read framer motion scroll value
-        const offset = scrollProgress.get();
-
-        // Calculate max depth. 20 is spacing, + 30 for extra run off area
-        const maxZ = numProjects * 20 + 30;
-
-        // Start z=5, travel to z = -maxZ
-        const targetZ = 5 - (offset * maxZ);
-
-        // Smooth damp to target allowing a slightly delayed silky feel
+        const maxZ = myProjects.length * CARD_SPACING + RUN_OFF;
+        const targetZ = 5 - scrollProgress.get() * maxZ;
         state.camera.position.z = THREE.MathUtils.damp(state.camera.position.z, targetZ, 4, delta);
-
-        // Dynamic wobble effect based on moving speed
-        const time = state.clock.elapsedTime;
-        state.camera.position.y = Math.sin(time * 1.5) * 0.15;
-        state.camera.position.x = Math.cos(time * 0.8) * 0.1;
     });
     return null;
 };
 
-const Scene = ({ scrollProgress }) => {
-    return (
-        <>
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 15, 10]} intensity={1.5} color="#ffffff" />
-            <pointLight position={[-10, 5, -20]} intensity={2} color="#0ea5e9" />
+const Scene = ({ scrollProgress }) => (
+    <>
+        <ambientLight intensity={0.6} />
+        <pointLight position={[10, 15, 10]} intensity={1.2} />
 
-            {/* Dark cool fog mimicking a cyber horizon */}
-            <fog attach="fog" args={['#020617', 10, 50]} />
+        <fog attach="fog" args={['#020617', 10, 50]} />
+        <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />
 
-            <Stars radius={100} depth={50} count={6000} factor={5} saturation={0.5} fade speed={1.5} />
+        <JourneyCamera scrollProgress={scrollProgress} />
 
-            <JourneyCamera scrollProgress={scrollProgress} numProjects={myProjects.length} />
+        <group position={[0, -4, 0]}>
+            <gridHelper args={[300, 150, '#38bdf8', '#0f172a']} position={[0, 0, -100]} />
+            <mesh position={[0, 0.05, -100]} rotation={[-Math.PI / 2, 0, 0]}>
+                <planeGeometry args={[0.2, 300]} />
+                <meshBasicMaterial color="#38bdf8" transparent opacity={0.7} />
+            </mesh>
+        </group>
 
-            {/* The infinite road grid */}
-            <group position={[0, -4, 0]}>
-                <gridHelper args={[300, 150, '#38bdf8', '#0f172a']} position={[0, 0, -100]} />
-                {/* Glowing neon line down the middle */}
-                <mesh position={[0, 0.05, -100]} rotation={[-Math.PI / 2, 0, 0]}>
-                    <planeGeometry args={[0.2, 300]} />
-                    <meshBasicMaterial color="#38bdf8" transparent opacity={0.8} />
-                </mesh>
-            </group>
-
-            {/* Display our floating tech logos */}
-            <FloatingLogos numProjects={myProjects.length} />
-
-            {/* Portal at the very end */}
-            <Float floatIntensity={1} speed={1}>
-                <mesh position={[0, 5, -(myProjects.length * 20 + 15)]}>
-                    <ringGeometry args={[15, 18, 64]} />
-                    <meshBasicMaterial color="#0ea5e9" transparent opacity={0.6} side={THREE.DoubleSide} />
-                </mesh>
-                <pointLight position={[0, 5, -(myProjects.length * 20 + 15)]} intensity={5} color="#0ea5e9" distance={50} />
-            </Float>
-
-            {myProjects.map((p, i) => (
-                <ProjectCard key={p.id} project={p} index={i} />
-            ))}
-        </>
-    );
-};
+        {myProjects.map((project, index) => (
+            <SceneCard key={project.id} project={project} index={index} />
+        ))}
+    </>
+);
 
 const ProjectsPage = () => {
     const container = useRef(null);
@@ -259,105 +263,68 @@ const ProjectsPage = () => {
         offset: ["start start", "end end"]
     });
 
+
+    const headerOpacity = useTransform(scrollYProgress, [0, 0.04], [1, 0]);
+    const headerY = useTransform(scrollYProgress, [0, 0.04], [0, -80]);
+    const hintOpacity = useTransform(scrollYProgress, [0, 0.03], [1, 0]);
+
     return (
         <main className="projects-wrapper dark:bg-[#020617]">
-            {/* Desktop View with 3D Canvas */}
-            <div ref={container} className="projects-canvas-container h-[600vh]" style={{ height: `${myProjects.length * 100 + 100}vh` }}>
+            {/* Desktop: the 3D journey */}
+            <div
+                ref={container}
+                className="projects-canvas-container"
+                style={{ height: `${myProjects.length * 75 + 50}vh` }}
+            >
                 <div className="sticky top-0 w-full h-screen overflow-hidden">
-                    {/* Header overlay */}
-                    <div className="absolute top-28 left-0 w-full text-center z-10 pointer-events-none px-6">
-                        <motion.h1
-                            initial={{ opacity: 0, y: -20, scale: 0.9 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
-                            className="project-3d-title font-extrabold leading-tight mb-4 text-white drop-shadow-[0_0_15px_rgba(56,189,248,0.5)]"
-                        >
-                            Project <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary filter drop-shadow-[0_0_10px_rgba(56,189,248,0.8)]">Journey</span>
-                        </motion.h1>
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 1, delay: 0.5 }}
-                            className="project-3d-desc text-slate-300 max-w-2xl mx-auto drop-shadow-md"
-                        >
-                            Scroll down to travel through a dimension of my finest creations.
-                        </motion.p>
-                    </div>
+                    <motion.header
+                        style={{ opacity: headerOpacity, y: headerY }}
+                        className="absolute top-24 left-0 w-full px-6 text-center z-10 pointer-events-none"
+                    >
+                        <h1 className="project-3d-title font-extrabold leading-tight mb-4 text-white">
+                            Project <span className="text-gradient">Journey</span>
+                        </h1>
+                    </motion.header>
 
-                    {/* 3D Scene */}
                     <div className="absolute inset-0 z-0">
-                        <Canvas camera={{ position: [0, 0, 5], fov: 60 }} gl={{ antialias: true }}>
+                        <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
                             <Scene scrollProgress={scrollYProgress} />
                         </Canvas>
                     </div>
 
-                    {/* Scroll Indicator */}
                     <motion.div
-                        initial={{ opacity: 1 }}
-                        style={{ opacity: useTransform(scrollYProgress, [0, 0.05], [1, 0]) }}
-                        className="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-white/80 text-sm animate-bounce text-center pointer-events-none z-10 flex flex-col items-center gap-2"
+                        style={{ opacity: hintOpacity }}
+                        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/70 pointer-events-none animate-bounce"
                     >
-                        <i className="fas fa-chevron-down text-3xl drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]"></i>
+                        <i className="fas fa-chevron-down text-2xl"></i>
                         <span className="tracking-[0.3em] uppercase text-[10px] font-bold">Scroll</span>
                     </motion.div>
 
-                    {/* Progress bar overlay indicator */}
-                    <div className="absolute right-6 top-1/2 transform -translate-y-1/2 h-1/2 w-1 bg-white/10 rounded-full z-10 pointer-events-none hidden md:block">
-                        <div className="relative w-full h-full overflow-hidden rounded-full">
-                            <motion.div
-                                className="absolute top-0 left-0 w-full bg-primary shadow-[0_0_10px_rgba(56,189,248,0.8)]"
-                                style={{ height: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]) }}
-                            />
-                        </div>
+                    {/* Progress rail */}
+                    <div className="absolute right-6 top-1/2 -translate-y-1/2 h-1/2 w-1 rounded-full bg-white/10 overflow-hidden z-10 pointer-events-none hidden md:block">
+                        <motion.div
+                            className="w-full bg-primary"
+                            style={{ height: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]) }}
+                        />
                     </div>
                 </div>
             </div>
 
-            {/* Mobile Fallback View */}
+            {/* Mobile: the same cards, as a plain list */}
             <div className="projects-mobile-container pt-32 pb-24 px-6 min-h-screen">
-                <header className="text-center mb-16" data-aos="fade-down">
-                    <h1 className="project-mobile-title font-extrabold leading-tight mb-4 text-slate-900 dark:text-white">
+                <header className="text-center mb-12" data-aos="fade-down">
+                    <h1 className="project-mobile-title font-extrabold leading-tight mb-3 text-slate-900 dark:text-white">
                         Project <span className="text-gradient">Journey</span>
                     </h1>
                     <p className="text-sm text-slate-500 dark:text-slate-400">
-                        Scroll down to travel through my finest creations.
+                        My work, newest first.
                     </p>
                 </header>
-                <div className="space-y-8 flex flex-col items-center">
-                    {myProjects.map((project, index) => (
-                        <div key={project.id} data-aos="fade-up" className="glass-panel w-full max-w-sm p-6 rounded-3xl relative overflow-hidden group shadow-lg hover:shadow-primary/20 transition-all border border-slate-200 dark:border-white/10">
-                            <div className="flex justify-between items-start mb-4 relative z-10">
-                                <div className={`px-2 py-1 text-[10px] font-bold rounded-full ${project.type === 'primary' ? 'bg-primary/20 text-primary border border-primary/30' : 'bg-secondary/20 text-secondary border border-secondary/30'}`}>
-                                    <i className="fas fa-code-branch mr-1"></i>
-                                    {project.tag}
-                                </div>
-                                <span className="text-[10px] font-semibold tracking-wider text-slate-600 dark:text-slate-300 bg-slate-200 dark:bg-black/30 px-2 py-1 rounded-full">{project.year}</span>
-                            </div>
 
-                            <h3 className="text-2xl font-extrabold mb-3 text-slate-800 dark:text-white">
-                                {project.title}
-                            </h3>
-
-                            <p className="text-slate-600 dark:text-slate-300 mb-6 text-sm leading-relaxed">
-                                {project.desc}
-                            </p>
-
-                            <div className="flex flex-wrap gap-2 mb-8 relative z-10">
-                                {project.tech.map((t, i) => (
-                                    <span key={i} className="text-[10px] font-semibold px-2 py-1 rounded bg-slate-100 dark:bg-black/40 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600/50">
-                                        {t}
-                                    </span>
-                                ))}
-                            </div>
-
-                            <div className="flex gap-4 pt-4 border-t border-slate-200 dark:border-slate-600/50 relative z-10 justify-start">
-                                <a href={project.github} className="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors font-semibold text-xs flex items-center gap-1">
-                                    <i className="fab fa-github text-lg"></i> Source
-                                </a>
-                                <a href={project.link} className="text-slate-600 dark:text-slate-300 hover:text-secondary transition-colors font-semibold text-xs flex items-center gap-1">
-                                    <i className="fas fa-external-link-alt text-base"></i> Live
-                                </a>
-                            </div>
+                <div className="flex flex-col items-center gap-6">
+                    {myProjects.map((project) => (
+                        <div key={project.id} data-aos="fade-up" className="w-full max-w-sm">
+                            <ProjectCard project={project} />
                         </div>
                     ))}
                 </div>

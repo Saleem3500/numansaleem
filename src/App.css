@@ -1,8 +1,19 @@
 #root {
   /* max-width: 1280px; */
   margin: 0 auto;
-  padding: 2rem;
+  /* No padding: the layout is full-bleed so the footer sits flush at the
+     bottom and its background band reaches both edges of the viewport. */
+  padding: 0;
   text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Let the app shell fill the root so the footer is pushed to the bottom
+   on short pages instead of floating mid-screen. */
+#main-content {
+  flex: 1 0 auto;
 }
 
 .logo {

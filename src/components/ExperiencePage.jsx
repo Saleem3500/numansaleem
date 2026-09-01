@@ -3,17 +3,33 @@ import { motion } from 'framer-motion';
 
 const experiences = [
     {
-        id: 1,
+        id: 0,
         title: "Associate Software Developer (Full Time)",
-        company: "Wizmen Systems, Lahore",
-        date: "July 2025 – Present",
+        company: "AdamDevSol, Lahore",
+        date: "Aug 2025 – Present",
         type: "primary",
         icon: "fa-laptop-code",
-        stack: ["MERN Stack", "Express.js", "Node.js", "SQL DB"],
+        stack: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "AWS", "REST APIs"],
         points: [
-            "Implemented activity-tracking mechanisms to analyze 50+ user behavior patterns",
-            "Designed 10+ dashboards and graphs using Oracle Apex queries, reducing data retrieval time by 30%",
-            "Generated 10+ monthly reports utilizing SQL formulas and Bootstrap Tables"
+            "Develop and maintain responsive full-stack web applications",
+            "Build reusable frontend components and integrate REST APIs",
+            "Work with Next.js, Node.js, TypeScript, PostgreSQL, and AWS",
+            "Collaborate with team members to deliver reliable, user-friendly solutions"
+        ]
+    },
+    {
+        id: 1,
+        title: "Associate Developer (Full Time)",
+        company: "Wizmen Systems, Wapda Town, Lahore",
+        date: "Feb 2024 – Jun 2025",
+        type: "secondary",
+        icon: "fa-chart-line",
+        stack: ["Oracle APEX", "SQL", "Bootstrap", "Node.js", "Express.js"],
+        points: [
+            "Implemented activity-tracking mechanisms to analyze 50+ user behavior patterns for data-driven decision-making",
+            "Designed 10+ interactive dashboards and data visualizations using Oracle APEX",
+            "Reduced data retrieval time by 30% through dashboard and query optimization",
+            "Generated 10+ monthly analytical reports using SQL and Bootstrap Tables"
         ]
     },
     {
@@ -46,16 +62,17 @@ const experiences = [
     },
     {
         id: 4,
-        title: "MERN Stack Developer Intern (3 Months)",
-        company: "Code Graper's, Lahore",
-        date: "2023",
+        title: "Full Stack Intern (3 Months)",
+        company: "Code Graphers, Lahore, Pakistan",
+        date: "Apr 2023 – Jun 2023",
         type: "secondary",
         icon: "fa-server",
-        stack: ["Node.js", "MongoDB", "Express.js", "REST APIs"],
+        stack: ["Node.js", "Express.js", "MongoDB", "REST APIs", "Database Design"],
         points: [
-            "Completed a 3-month intensive MERN stack training internship",
-            "Developed a full-stack To-Do List application using Node.js",
-            "Worked with RESTful APIs, backend routing, and database schema design"
+            "Integrated 8+ RESTful APIs, reducing server response time by 20%",
+            "Designed scalable database schemas for efficient data management across multiple modules",
+            "Developed and tested backend features using Node.js and Express.js",
+            "Collaborated with the development team to build and maintain scalable web applications"
         ]
     }
 ];

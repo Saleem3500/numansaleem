@@ -10,22 +10,22 @@ const Achievements = () => {
                 </div>
 
                 <div className="flex flex-wrap justify-center gap-6" data-aos="fade-up">
-                    <div className="glass-panel px-6 py-4 rounded-full flex items-center gap-3 interactive shadow-lg">
-                        <i className="fas fa-award text-yellow-500 text-2xl"></i>
-                        <span className="font-bold">MERN Stack Developer Certification</span>
-                    </div>
-                    <div className="glass-panel px-6 py-4 rounded-full flex items-center gap-3 interactive shadow-lg">
-                        <i className="fas fa-certificate text-blue-500 text-2xl"></i>
-                        <span className="font-bold">Prompt Engineering Certification</span>
-                    </div>
-                    <div className="glass-panel px-6 py-4 rounded-full flex items-center gap-3 interactive shadow-lg">
-                        <i className="fas fa-paint-brush text-purple-500 text-2xl"></i>
-                        <span className="font-bold">Graphic Designing Certificate</span>
-                    </div>
-                    <div className="glass-panel px-6 py-4 rounded-full flex items-center gap-3 interactive shadow-lg">
-                        <i className="fas fa-trophy text-orange-500 text-2xl"></i>
-                        <span className="font-bold">Coding for Data (SQL)</span>
-                    </div>
+                    {[
+                        { icon: 'fas fa-award', color: 'text-yellow-500', title: 'MERN Stack Developer Certification', issuer: 'Theeta Training' },
+                        { icon: 'fas fa-certificate', color: 'text-blue-500', title: 'Prompt Engineering Certification', issuer: 'Sololearn' },
+                        { icon: 'fas fa-trophy', color: 'text-orange-500', title: 'Coding for Data (SQL)', issuer: 'Sololearn' },
+                        { icon: 'fas fa-paint-brush', color: 'text-purple-500', title: 'Graphic Designing Certificate', issuer: null },
+                    ].map((cert) => (
+                        <div key={cert.title} className="glass-panel px-6 py-4 rounded-full flex items-center gap-3 interactive shadow-lg">
+                            <i className={`${cert.icon} ${cert.color} text-2xl`}></i>
+                            <span className="font-bold text-left leading-tight">
+                                {cert.title}
+                                {cert.issuer && (
+                                    <span className="block text-xs font-medium text-slate-500 dark:text-slate-400">{cert.issuer}</span>
+                                )}
+                            </span>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>

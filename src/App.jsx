@@ -62,7 +62,7 @@ const App = () => {
     // If GSAP is available, use it for the smooth animation sequence
     if (window.gsap) {
       window.gsap.timeline()
-        .to('.smash-boom-text', { scale: 0, opacity: 0, duration: 0.6, ease: 'power2.in' })
+        .to('.spinner, .spinner-label', { scale: 0.8, opacity: 0, duration: 0.5, ease: 'power2.in' })
         .to('#loader', { opacity: 0, duration: 0.6, onComplete: completeLoading });
     } else {
       completeLoading();
@@ -71,19 +71,30 @@ const App = () => {
 
   // Handle route switching & smooth scrolling
   useEffect(() => {
+    let frame;
+
     if (!location.hash) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      const targetElement = document.querySelector(location.hash);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-      }
+      // Arriving from another route, the target section is not painted yet on
+      // the first pass, so retry for a few frames before giving up.
+      const scrollToHash = (attempt = 0) => {
+        const targetElement = document.querySelector(location.hash);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        } else if (attempt < 20) {
+          frame = requestAnimationFrame(() => scrollToHash(attempt + 1));
+        }
+      };
+      scrollToHash();
     }
 
     // Refresh scroll animations dynamically whenever layout changes
     if (window.AOS) {
       setTimeout(() => window.AOS.refreshHard(), 100);
     }
+
+    return () => cancelAnimationFrame(frame);
   }, [location]);
 
   // Simplify theme toggling logic

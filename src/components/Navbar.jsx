@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Navbar = ({ toggleTheme, isDark }) => {
-    const location = useLocation();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    // Helper to scroll smoothly if we are on the same page, or let browser handle it if not
-    const getHref = (hash) => {
-        return location.pathname === '/' ? hash : `/${hash}`;
-    };
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -27,7 +21,6 @@ const Navbar = ({ toggleTheme, isDark }) => {
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center space-x-6 text-sm font-medium">
-                    <a href={getHref('#about')} className="hover:text-primary transition-colors interactive">About</a>
                     <Link to="/experience" className="hover:text-primary transition-colors interactive">Experience</Link>
                     <Link to="/projects" className="hover:text-primary transition-colors interactive">Projects</Link>
                     <Link to="/education" className="hover:text-primary transition-colors interactive">Education</Link>
@@ -60,12 +53,11 @@ const Navbar = ({ toggleTheme, isDark }) => {
             {/* Mobile Dropdown Menu */}
             {isMenuOpen && (
                 <div className="md:hidden absolute top-[110%] left-0 w-full glass-nav rounded-2xl border border-white/10 shadow-2xl overflow-hidden py-4 flex flex-col items-center space-y-2 font-medium">
-                    <a href={getHref('#about')} onClick={closeMenu} className="w-full text-center py-3 hover:bg-primary/10 hover:text-primary transition-colors">About</a>
                     <Link to="/experience" onClick={closeMenu} className="w-full text-center py-3 hover:bg-primary/10 hover:text-primary transition-colors">Experience</Link>
                     <Link to="/projects" onClick={closeMenu} className="w-full text-center py-3 hover:bg-primary/10 hover:text-primary transition-colors">Projects</Link>
                     <Link to="/education" onClick={closeMenu} className="w-full text-center py-3 hover:bg-primary/10 hover:text-primary transition-colors">Education</Link>
                     <Link to="/skills" onClick={closeMenu} className="w-full text-center py-3 hover:bg-primary/10 hover:text-primary transition-colors">Skills & Services</Link>
-                    <Link to="/gallery" className="w-full text-center py-3 hover:bg-primary/10 hover:text-primary transition-colors">Gallery</Link>
+                    <Link to="/gallery" onClick={closeMenu} className="w-full text-center py-3 hover:bg-primary/10 hover:text-primary transition-colors">Gallery</Link>
                 </div>
             )}
         </nav>
